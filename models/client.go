@@ -9,6 +9,7 @@ import (
 type Client struct {
 	gorm.Model
 	Name string `json:"name"`
+	Password string `json:"password"`
 }
 
 func (client *Client) Create() (map[string] interface{}) {
