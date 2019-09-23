@@ -7,6 +7,7 @@ import (
 
 	"github.com/Lockwarr/POSAR/models"
 	"github.com/Lockwarr/POSAR/pkg/luggage"
+	"github.com/Lockwarr/POSAR/pkg/products"
 	"github.com/go-chi/chi"
 )
 
@@ -14,8 +15,11 @@ func main() {
 	r := chi.NewRouter()
 
 	var test models.FirstLuggage
+	var test1 models.Products
 	luggageHandler := luggage.NewLuggageHandler(test)
+	productsHandler := products.NewProductsHandler(test1)
 	r.Route("/v1", func(r chi.Router) {
+		r.Post("/products/select", productsHandler.SelectProducts)
 		r.Group(func(r chi.Router) {
 			r.Route("/luggage", func(r chi.Router) {
 				r.Post("/quote", luggageHandler.GlobalMinimalQuotation)

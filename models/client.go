@@ -8,8 +8,7 @@ import (
 //a struct to rep client
 type Client struct {
 	gorm.Model
-	Name     string `json:"name"`
-	Password string `json:"password"`
+	Name string `json:"name"`
 }
 
 func (client *Client) Create() map[string]interface{} {
