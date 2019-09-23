@@ -1,7 +1,7 @@
 package models
 
 import (
-	u "../utils"
+	u "github.com/Lockwarr/POSAR/utils"
 	"github.com/jinzhu/gorm"
 )
 

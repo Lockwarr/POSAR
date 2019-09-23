@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"../utils"
-	"github.com/Lockwarr/POSAR/pkg/models"
+	"github.com/Lockwarr/POSAR/models"
+	"github.com/Lockwarr/POSAR/utils"
 )
 
 // Handler handler for luggages
