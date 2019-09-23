@@ -5,16 +5,25 @@ import (
 	"net/http"
 	"os"
 
-	"./controllers"
-	"github.com/gorilla/mux"
-	"github.com/goji/httpauth"
+	"./models"
+	"./pkg/luggage"
+	"github.com/go-chi/chi"
 )
 
 func main() {
-	router := mux.NewRouter()
+	r := chi.NewRouter()
 
-	router.HandleFunc("/test", controllers.Test).Methods("GET")
-	http.Handle("/", httpauth.SimpleBasicAuth("test", "test")(router))
+	var test models.FirstLuggage
+	luggageHandler := luggage.NewLuggageHandler(test)
+	r.Route("/v1", func(r chi.Router) {
+		r.Group(func(r chi.Router) {
+			r.Route("/luggage", func(r chi.Router) {
+				r.Post("/quote", luggageHandler.GlobalMinimalQuotation)
+				r.Get("/countries", luggageHandler.GetCountries)
+				r.Get("/itemtypes", luggageHandler.GetItemTypes)
+			})
+		})
+	})
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8000"
@@ -22,7 +31,7 @@ func main() {
 
 	fmt.Println("http://localhost:" + port)
 
-	err := http.ListenAndServe(":"+port, router) 
+	err := http.ListenAndServe(":"+port, r)
 	if err != nil {
 		fmt.Print(err)
 	}

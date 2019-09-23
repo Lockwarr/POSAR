@@ -1,15 +1,16 @@
 package utils
 
 import (
-	"encoding/json"
 	"net/http"
 )
 
-func Message(status bool, message string) (map[string]interface{}) {
-	return map[string]interface{} {"status" : status, "message" : message}
+func Message(status bool, message string) map[string]interface{} {
+	return map[string]interface{}{"status": status, "message": message}
 }
 
-func Respond(w http.ResponseWriter, data map[string] interface{})  {
-	w.Header().Add("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(data)
+func Response(w http.ResponseWriter, code int, body []byte) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
+
+	w.Write(body)
 }
