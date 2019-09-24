@@ -24,7 +24,7 @@ func (client *Client) Create() map[string]interface{} {
 	return response
 }
 
-func GetUser(u uint) *Client {
+func GetClient(u uint) *Client {
 
 	c := &Client{}
 	GetDB().Table("client").Where("id = ?", u).First(c)

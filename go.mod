@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/go-chi/chi v4.0.2+incompatible
+	github.com/go-pg/pg/v9 v9.0.0-beta.12
 	github.com/jinzhu/gorm v1.9.10
 	github.com/joho/godotenv v1.3.0
 )

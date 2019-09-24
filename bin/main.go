@@ -20,6 +20,7 @@ func main() {
 	productsHandler := products.NewProductsHandler(test1)
 	r.Route("/v1", func(r chi.Router) {
 		r.Post("/products/select", productsHandler.SelectProducts)
+		r.Get("/products/{id}", productsHandler.SelectedProducts)
 		r.Group(func(r chi.Router) {
 			r.Route("/luggage", func(r chi.Router) {
 				r.Post("/quote", luggageHandler.GlobalMinimalQuotation)

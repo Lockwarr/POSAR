@@ -8,7 +8,6 @@ import (
 //a struct to rep PaymentInfo
 type Orders struct {
 	gorm.Model
-	ID           int `json:"id"`
 	FirstLuggage int `json:"first_luggage"`
 	C3TravelAPI  int `json:"c3_travel_api"`
 	MeMD         int `json:"me_md"`

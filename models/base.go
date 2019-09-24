@@ -1,11 +1,12 @@
 package models
 
 import (
-	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/jinzhu/gorm"
-	"os"
-	"github.com/joho/godotenv"
 	"fmt"
+	"os"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/joho/godotenv"
 )
 
 var db *gorm.DB //database
@@ -22,7 +23,6 @@ func init() {
 	dbName := os.Getenv("db_name")
 	dbHost := os.Getenv("db_host")
 
-
 	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable password=%s", dbHost, username, dbName, password) //Build connection string
 	fmt.Println(dbUri)
 
@@ -32,7 +32,7 @@ func init() {
 	}
 
 	db = conn
-	db.Debug().AutoMigrate(&Client{}) //Database migration
+	db.Debug().AutoMigrate(&Client{}, &Products{}, &FirstLuggage{}, &Orders{}, &PaymentInfo{}) //Database migration
 }
 
 //returns a handle to the DB object

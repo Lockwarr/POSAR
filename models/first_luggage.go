@@ -8,7 +8,6 @@ import (
 //FirstLuggage - a struct to rep FirstLuggage model
 type FirstLuggage struct {
 	gorm.Model
-	ID            int    `json:"id"`
 	CountryFrom   string `json:"country_from"`
 	CountryTo     string `json:"country_to"`
 	Return        bool   `json:"return"`
