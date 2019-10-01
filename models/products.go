@@ -8,16 +8,16 @@ import (
 //a struct to rep selected products
 type Products struct {
 	gorm.Model
-	ClientID            int  `json:"client_id", gorm:"foreignkey:ClientID"`
+	ClientID            int  `json:"client_id"`
 	FirstLuggagePresent bool `json:"first_luggage_present"`
 	C3TravelApiPresent  bool `json:"c3_travel_api_present"`
 	MeMDPresent         bool `json:"me_md_present"`
 }
 
 func (products *Products) Update() map[string]interface{} {
-	//if GetClient(uint(products.ClientID)) == nil {
-	//	return u.Message(false, "Client with this ID doesn't exist.")
-	//}
+	if GetClient(uint(products.ClientID)) == nil {
+		return u.Message(false, "Client with this ID doesn't exist.")
+	}
 
 	GetDB().Save(&products)
 

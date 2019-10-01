@@ -28,10 +28,21 @@ func (orders *Orders) Create() map[string]interface{} {
 	return response
 }
 
-func GetOrders(u uint) *Orders {
+func GetOrdersForClient(clientID int) *Orders {
 
 	p := &Orders{}
-	GetDB().Table("payment_info").Where("id = ?", u).First(p)
+	GetDB().Table("payment_info").Where("client_id = ?", clientID).First(p)
+	if p.ID <= 0 { //Orders not found!
+		return nil
+	}
+
+	return p
+}
+
+func GetOrdersForUser(userID int) *Orders {
+
+	p := &Orders{}
+	GetDB().Table("payment_info").Where("user_id = ?", userID).First(p)
 	if p.ID <= 0 { //Orders not found!
 		return nil
 	}
